@@ -1,1 +1,22 @@
-{"name":"parenthub-platform","private":true,"scripts":{"dev":"turbo dev","build":"turbo build","lint":"turbo lint","test":"turbo test","clean":"turbo clean && rm -rf node_modules"},"devDependencies":{"turbo":"^2.3.0","prettier":"^3.4.0","eslint":"^9.15.0"},"packageManager":"pnpm@9.14.0","engines":{"node":">=20.0.0"}}
+{
+  "name": "parenthub-platform",
+  "private": true,
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "lint": "turbo lint",
+    "test": "turbo test",
+    "clean": "turbo clean && rm -rf node_modules"
+  },
+  "devDependencies": {
+    "next": "14.2.3",
+    "turbo": "^2.3.0",
+    "prettier": "^3.4.0",
+    "eslint": "^9.15.0"
+  },
+  "packageManager": "pnpm@9.14.0",
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
+
