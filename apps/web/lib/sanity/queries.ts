@@ -253,3 +253,27 @@ export async function searchArticles(keyword: string) {
     params: { wildcardKeyword },
   });
 }
+
+export async function getTagArticles(slug: string) {
+  return sanityFetch({
+    query: `*[_type == "article" && tags[]->slug.current match $slug] | order(publishedAt desc) {
+      _id, title, slug, excerpt, mainImage, publishedAt, readingTime,
+      category->{slug, title}, subcategory->{slug, title}, author->{name, image}
+    }`,
+    params: { slug },
+    tags: ["article", "tag"]
+  });
+}
+
+export async function getAllSlugs() {
+  return sanityFetch({
+    query: `*[_type == "article"] {
+      "slug": slug.current,
+      "category": category->slug.current,
+      "subcategory": subcategory->slug.current,
+      _updatedAt
+    }`,
+    tags: ["article"]
+  });
+}
+
