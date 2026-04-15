@@ -7,8 +7,8 @@ export const client = createClient({
   useCdn: process.env.NODE_ENV === "production",
   perspective: "published",
   stega: {
-    enabled: false, // Always off for regular users
-    studioUrl: "http://localhost:3333",
+    enabled: false,
+    studioUrl: process.env.NEXT_PUBLIC_SANITY_STUDIO_URL || "http://localhost:3333",
   },
 });
 
@@ -20,7 +20,7 @@ export const previewClient = createClient({
   token: process.env.SANITY_API_READ_TOKEN,
   perspective: "previewDrafts",
   stega: {
-    enabled: true, // Only on when using the secure preview token
-    studioUrl: "http://localhost:3333",
+    enabled: false,
+    studioUrl: process.env.NEXT_PUBLIC_SANITY_STUDIO_URL || "http://localhost:3333",
   },
 });

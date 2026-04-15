@@ -10,6 +10,25 @@ export const tableBlock = defineType({
       title: "Table Data",
       type: "table",
     }),
+    defineField({
+      name: "alignment",
+      title: "Cell Alignment",
+      type: "string",
+      options: {
+        list: [
+          { title: "Left", value: "left" },
+          { title: "Center", value: "center" },
+          { title: "Right", value: "right" }
+        ]
+      },
+      initialValue: "center"
+    }),
+    defineField({
+      name: "showIndex",
+      title: "Show Row Numbers (Index)",
+      type: "boolean",
+      initialValue: false,
+    }),
   ],
   preview: {
     select: {

@@ -41,13 +41,13 @@ export function ArticleView({ article, category, subcategory }: ArticleViewProps
             <ArticleBody body={article.body} />
           </div>
           
-          <AuthorCard author={article.author} />
-          
           <EmailArticleForm 
             article={article} 
             categorySlug={category} 
             subcategorySlug={subcategory || "general"} 
           />
+
+          <AuthorCard author={article.author} />
           
           <RelatedArticles articleId={article._id} category={category} />
         </article>

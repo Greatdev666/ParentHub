@@ -2,30 +2,68 @@ import React from "react";
 
 interface CardItem {
   title: string;
+  subtitle?: string;
   text: string;
+  tip?: string;
+  tags?: string[];
 }
 
 export function NumberedCardList({ items }: { items: CardItem[] }) {
   if (!items || items.length === 0) return null;
 
   return (
-    <div className="my-10 flex flex-col gap-6">
+    <div className="my-10 flex flex-col gap-10">
       {items.map((item, i) => (
         <div 
           key={i} 
-          className="group relative bg-[#FDFCFB]/50 dark:bg-brand-dark-card/50 border border-brand-navy/5 dark:border-white/5 rounded-2xl p-6 md:p-8 shadow-sm hover:shadow-md transition-all duration-300"
+          className="group relative bg-white dark:bg-brand-dark-card border border-brand-navy/10 dark:border-white/10 rounded-3xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300"
         >
-          <h3 className="flex items-baseline gap-4 text-xl md:text-2xl font-display font-bold text-brand-navy dark:text-white mb-3 leading-tight">
-            <span className="text-2xl md:text-3xl font-display font-bold text-brand-orange leading-none shrink-0 tabular-nums">
-              {i + 1}
-            </span>
-            <span>{item.title}</span>
-          </h3>
-          
-          <div className="pl-0 md:pl-10">
-            <p className="text-brand-navy/70 dark:text-gray-400 text-lg leading-relaxed">
-              {item.text}
-            </p>
+          <div className="flex flex-col md:flex-row">
+            {/* Left Number Bar */}
+            <div className="w-full md:w-20 bg-[#BD552A] flex items-center justify-center p-4 md:p-0">
+              <span className="text-3xl font-display font-black text-white/50">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+            </div>
+
+            {/* Content Area */}
+            <div className="flex-1 p-6 md:p-10">
+              <div className="mb-6">
+                <h3 className="text-2xl font-display font-bold text-brand-navy dark:text-white leading-tight mb-1">
+                  {item.title}
+                </h3>
+                {item.subtitle && (
+                  <p className="text-brand-orange italic font-serif text-lg opacity-80">
+                    {item.subtitle}
+                  </p>
+                )}
+              </div>
+              
+              <div className="prose prose-lg dark:prose-invert max-w-none mb-6 text-brand-navy/80 dark:text-gray-300 leading-relaxed font-outfit">
+                {item.text}
+              </div>
+
+              {item.tip && (
+                <div className="bg-[#FFFBEB] dark:bg-amber-900/10 border-l-4 border-amber-200 p-5 rounded-r-xl mb-6">
+                  <p className="text-amber-900 dark:text-amber-200 text-base leading-relaxed">
+                    {item.tip}
+                  </p>
+                </div>
+              )}
+
+              {item.tags && item.tags.length > 0 && (
+                <div className="flex flex-wrap gap-2 mt-auto">
+                  {item.tags.map((tag, index) => (
+                    <span 
+                      key={index}
+                      className="px-4 py-1.5 bg-[#BD552A]/5 dark:bg-[#BD552A]/10 text-[#BD552A] text-xs font-bold rounded-full border border-[#BD552A]/20"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       ))}

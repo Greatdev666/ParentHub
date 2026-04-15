@@ -197,7 +197,22 @@ export async function getArticle(slug: string) {
   return sanityFetch({
     query: `*[_type == "article" && slug.current == $slug][0] {
       ...,
-      category->{slug, title}, subcategory->{slug, title}, author->{_id, name, "slug": slug.current, image, shortBio, role}
+      body[] {
+        ...,
+        _type == "articleEmbedList" => {
+          ...,
+          articles[]-> {
+            _id,
+            title,
+            slug,
+            readingTime,
+            category->{title, slug}
+          }
+        }
+      },
+      category->{slug, title},
+      subcategory->{slug, title},
+      author->{_id, name, "slug": slug.current, image, shortBio, role}
     }`,
     params: { slug },
     tags: ["article"]

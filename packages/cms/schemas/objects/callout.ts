@@ -13,10 +13,24 @@ export const callout = defineType({
           { title: "Standard Info", value: "info" },
           { title: "Warning / Attention", value: "warning" },
           { title: "Tip / Recommendation", value: "tip" },
-          { title: "From the Research", value: "research" }
+          { title: "From the Research", value: "research" },
+          { title: "Quote", value: "quote" },
+          { title: "Accent Dark CTA", value: "accentDark" }
         ] 
       }, 
       initialValue: "research" 
+    }),
+    defineField({ 
+      name: "variant", 
+      title: "Display Style", 
+      type: "string", 
+      options: { 
+        list: [
+          { title: "Rounded Box", value: "box" },
+          { title: "Side-Accent Line", value: "side-accent" }
+        ] 
+      }, 
+      initialValue: "box" 
     }),
     defineField({ 
       name: "title", 

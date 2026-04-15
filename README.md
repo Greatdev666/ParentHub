@@ -7,49 +7,95 @@
 ![Turborepo](https://img.shields.io/badge/Turborepo-EF4444?style=for-the-badge&logo=turborepo&logoColor=white)
 ![pnpm](https://img.shields.io/badge/pnpm-F69220?style=for-the-badge&logo=pnpm&logoColor=white)
 
-**A modern, high-performance content platform for parenting insights—built with a scalable, CMS-driven architecture for speed, flexibility, and editorial excellence.**
+**A production-grade editorial platform for expert-driven parenting content — featuring a universal code playground, sandboxed live previews, adaptive routing, and a premium "Warm Orange" design system.**
 
 ---
 
 ## Overview
 
-ParentHub is a production-grade content platform designed for delivering expert-driven parenting advice at scale. Inspired by leading editorial properties like Parents.com and What to Expect, ParentHub combines a blazing-fast Next.js frontend with a headless Sanity CMS backend, giving editorial teams full creative control while maintaining developer-grade performance and SEO standards.
+ParentHub is not a blog template. It is a modular, monorepo-architected content system built for real editorial workflows, multi-author credibility, interactive code experiences, and a premium reader experience.
 
-This is not a blog template. It is a modular, monorepo-architected content system built for real editorial workflows, multi-author credibility, and a premium reader experience.
+The platform combines a blazing-fast Next.js 14 frontend with a headless Sanity CMS backend, giving editorial teams full creative control — from rich callout variants and precision-aligned data tables to live code sandboxes — while maintaining developer-grade performance, SEO standards, and visual polish.
+
+Inspired by leading editorial properties like Parents.com, What to Expect, and Stripe's documentation experience.
 
 ---
 
 ## Key Features
 
-### Content and Editorial
+### Content & Editorial System
 
-- **Dynamic Homepage** - Algorithmically curated sections including Latest Articles, Featured Post hero, Category Spotlights, and a Team Showcase
-- **Featured Topics Carousel** - An interactive, auto-scrolling carousel highlighting editorially chosen articles
-- **Explore Topics** - A visual grid linking readers to top-level content categories
-- **Modular Content Blocks** - Articles support rich content beyond paragraphs: data tables, callout boxes, FAQ accordions, statistical grids, numbered step cards, product cards, and embedded video
-- **Author System** - Dedicated author profile pages with full bios, expertise badges, social links, and an automated feed of their published work
-- **Author Cards** - Every article displays a contextual author card linking to their profile, building reader trust and editorial credibility
+- **Dynamic Homepage** — Algorithmically curated sections including Latest Articles, Featured Post hero, Category Spotlights, and Team Showcase
+- **Featured Topics Carousel** — Interactive, auto-scrolling carousel highlighting editorially chosen articles
+- **Explore Topics** — Visual grid linking readers to top-level content categories
+- **Author System** — Dedicated author profile pages with bios, expertise badges, social links, and automated article feeds
+- **Author Cards** — Contextual author cards on every article, building trust and editorial credibility
+- **Article-in-Article Embedding** — "In This Post" cards with intelligent category-aware URL resolution for cross-linking related content
 
-### Discovery and Engagement
+### Rich Content Blocks
 
-- **Live Search** - A navbar-integrated search bar with 300ms debounced type-ahead suggestions, thumbnail previews, and a full results page
-- **Email Article Sharing** - Readers can send any article to their inbox via a one-click form powered by Resend, complete with branded HTML email templates
-- **Category and Subcategory Routing** - Deep, hierarchical content organization with automatic navigation generation from the CMS
-- **Related Articles** - Contextual recommendations displayed at the bottom of every article
+ParentHub supports **12 custom content blocks** beyond standard text, giving editors a component-level toolkit:
 
-### Performance and SEO
+| Block | Description |
+|-------|-------------|
+| **Callout Box** | Multi-type (Info, Warning, Tip, Research, Quote, Accent Dark) with **dual visual styles** — Rounded Box or Side-Accent Line |
+| **FAQ Accordion** | Expandable question/answer pairs with smooth animations |
+| **Data Table** | Structured tabular content with **cell alignment control** (Left/Center/Right) and **optional row indexing** |
+| **Statistical Grid** | Visual data cards with customizable shapes and metrics |
+| **Numbered Card List** | Ordered instructional content with branded tag styling |
+| **Product Card** | Merchandise or resource highlights |
+| **Video Embed** | YouTube/Vimeo integration with responsive aspect ratios |
+| **Image with Alt** | Accessible images with editor-defined alt text |
+| **Article Embed List** | Cross-article references with dynamic SEO-friendly URL construction |
+| **Code Snippet** | Syntax-aware code display with **Universal Playground** (see below) |
 
-- **Server-Side Rendering** - All pages are server-rendered via Next.js App Router for maximum performance and crawlability
-- **Structured Data** - Automatic JSON-LD injection for Articles and Breadcrumbs on every content page
-- **Dynamic Sitemap and Robots** - Programmatically generated sitemap.xml and robots.txt
-- **Open Graph Metadata** - Fully resolved OG tags for rich social media previews
-- **Dark Mode** - System-aware theme toggling with smooth transitions across the entire UI
+### Universal Code Playground
+
+A standout feature that elevates ParentHub from editorial platform to interactive learning environment:
+
+- **7 Supported Languages** — HTML, CSS, JavaScript, TypeScript, Python, JSON, and Bash/Shell
+- **Tabbed Interface** — Premium `[ Code ]` / `[ Preview ]` tab switcher on every snippet
+- **Sandboxed Live Preview** — Web languages (HTML/CSS/JS/TS) render inside a secure, isolated `<iframe>` using `srcdoc` with the `sandbox` attribute — zero risk to the parent document
+- **Terminal Simulation** — Python, Bash, and JSON snippets display editor-provided output in a realistic dark-mode terminal console with a blinking cursor and command prompt
+- **Copy to Clipboard** — One-click copy with visual confirmation state
+- **Editor-Controlled** — Editors toggle "Enable Live Preview" per snippet, and provide optional "Expected Output" for console languages
+
+### Discovery & Engagement
+
+- **Live Search** — Navbar-integrated search with 300ms debounced type-ahead suggestions, thumbnail previews, and full results page
+- **Email Article Sharing** — One-click inbox delivery powered by Resend with branded HTML email templates
+- **Universal Route Resolver** — A single catch-all resolver handles all content depths (1, 2, or 3 segments) with intelligent fallback logic, eliminating 404s for flat and nested article paths alike
+- **Related Articles** — Contextual recommendations at the bottom of every article
+
+### Performance & SEO
+
+- **Server-Side Rendering** — All pages rendered via Next.js App Router for maximum performance and crawlability
+- **Structured Data** — Automatic JSON-LD injection for Articles and Breadcrumbs
+- **Dynamic Sitemap & Robots** — Programmatically generated `sitemap.xml` and `robots.txt`
+- **Open Graph Metadata** — Fully resolved OG tags for rich social media previews
+- **Dark Mode** — System-aware theme toggling with smooth transitions across every component
 
 ### Editorial Workflow
 
-- **Draft Preview System** - Editors can preview unpublished content in a secure sidebar directly within Sanity Studio
-- **Webhook Revalidation** - On-demand ISR triggered by Sanity publish events for instant content updates without full rebuilds
-- **Visual Editing Isolation** - Stega markers and editorial overlays are strictly sandboxed to the preview environment
+- **Draft Preview System** — Editors preview unpublished content in a secure sidebar within Sanity Studio
+- **Webhook Revalidation** — On-demand ISR triggered by Sanity publish events for instant updates without full rebuilds
+- **Visual Editing Isolation** — Stega markers and editorial overlays sandboxed to the preview environment
+
+---
+
+## Design System — "Warm Orange" Palette
+
+ParentHub uses a curated, premium editorial aesthetic built around a **Burnt Orange & Peach** palette:
+
+| Token | Hex | Usage |
+|-------|-----|-------|
+| Brand Orange | `#BD552A` | Primary accents, headings, interactive highlights |
+| Brand Orange Dark | `#A34E24` | Hover states, deep emphasis |
+| Peach Background | `#FFF9F6` | Card backgrounds, callout fills, inline code highlights |
+| Peach Border | `#FFEDE0` | Subtle borders, card outlines |
+| Brand Navy | System default | Body text, table headers, dark-mode surfaces |
+
+All editorial components — callouts, tables, numbered cards, article embeds, code blocks, and body links — are unified under this palette.
 
 ---
 
@@ -60,7 +106,7 @@ This is not a blog template. It is a modular, monorepo-architected content syste
 | Runtime | Next.js 14 (App Router) | Server rendering, routing, API routes |
 | CMS | Sanity v3 | Headless content management, real-time editing |
 | Styling | Tailwind CSS 3 | Utility-first responsive design system |
-| Typography | tailwindcss/typography | Prose styling for long-form content |
+| Typography | @tailwindcss/typography | Prose styling for long-form content |
 | Email | Resend | Transactional email delivery |
 | Icons | Lucide React | Consistent, tree-shakeable icon set |
 | Monorepo | Turborepo + pnpm | Workspace orchestration and caching |
@@ -79,27 +125,38 @@ ParentHub follows a decoupled architecture with clear separation between content
 |                                  |
 |  Authors > Articles > Categories |
 |  Rich text blocks, media, SEO   |
+|  Code snippets, callout styles   |
 +----------------+-----------------+
                  |
                  | GROQ Queries
                  | Webhook (revalidation)
                  v
-+----------------------------------+
-|       Next.js App Router         |
-|                                  |
-|  Server Components (SSR/ISR)     |
-|  API Routes (/api/*)             |
-|  Client Components (Search, UI)  |
-|                                  |
-|  +----------------------------+  |
-|  |  Sanity Client (fetch.ts)  |  |
-|  |  Draft Mode / Preview      |  |
-|  |  Image URL Builder         |  |
-|  +----------------------------+  |
-+----------------------------------+
++------------------------------------------+
+|         Next.js App Router               |
+|                                          |
+|  Universal Route Resolver                |
+|  (Handles 1, 2, or 3-segment paths)     |
+|                                          |
+|  Server Components (SSR/ISR)             |
+|  API Routes (/api/*)                     |
+|  Client Components (Search, Playground)  |
+|                                          |
+|  +------------------------------------+  |
+|  |  Portable Text Serializers         |  |
+|  |  12 custom block renderers         |  |
+|  |  Sandboxed iframe engine           |  |
+|  |  Terminal simulation renderer      |  |
+|  +------------------------------------+  |
+|                                          |
+|  +------------------------------------+  |
+|  |  Sanity Client (fetch.ts)          |  |
+|  |  Draft Mode / Preview              |  |
+|  |  Image URL Builder                 |  |
+|  +------------------------------------+  |
++------------------------------------------+
 ```
 
-Data flows one direction: Editors create and publish content in Sanity. Sanity fires a webhook. Next.js revalidates the affected pages. Readers see fresh content within seconds.
+Data flows one direction: Editors create and publish content in Sanity → Sanity fires a webhook → Next.js revalidates the affected pages → Readers see fresh content within seconds.
 
 ---
 
@@ -111,6 +168,7 @@ ParentHub-Platform/
 |   +-- web/                          # Next.js frontend application
 |       |-- app/
 |       |   |-- (site)/               # Public-facing routes
+|       |   |   |-- [...slug]/        # Universal Route Resolver
 |       |   |   |-- [category]/       # Category listing pages
 |       |   |   |   +-- [subcategory]/
 |       |   |   |       +-- [slug]/   # Individual article pages
@@ -126,22 +184,30 @@ ParentHub-Platform/
 |       |       |-- preview/          # Draft mode activation
 |       |       +-- og/               # Dynamic OG image generation
 |       |-- components/
-|       |   |-- content/              # ArticleCard, AuthorCard, EmailForm
-|       |   |-- home/                 # Homepage sections (Hero, Carousel, etc.)
+|       |   |-- content/              # ArticleView, AuthorCard, EmailForm
+|       |   |-- home/                 # Homepage sections (Hero, Carousel)
 |       |   |-- layout/              # Header, Footer, SearchBar, ThemeToggle
-|       |   |-- portable-text/        # Rich content renderers (Table, FAQ, etc.)
+|       |   |-- portable-text/        # Rich content renderers:
+|       |   |   |-- Callout.tsx       #   Multi-variant callout (Box / Side-Accent)
+|       |   |   |-- TableBlock.tsx    #   Precision tables (Align + Index)
+|       |   |   |-- CodeBlock.tsx     #   Universal Playground (Iframe + Terminal)
+|       |   |   |-- ArticleEmbedList  #   In-article cross-linking
+|       |   |   |-- FAQBlock.tsx      #   Accordion FAQ
+|       |   |   |-- StatGrid.tsx      #   Statistical data cards
+|       |   |   |-- NumberedCardList  #   Ordered step cards
+|       |   |   +-- serializers.tsx   #   Central component registry
 |       |   |-- seo/                  # JSON-LD structured data components
-|       |   +-- ui/                   # Shared primitives (Card, Badge, etc.)
+|       |   +-- ui/                   # Shared primitives (Card, Badge)
 |       +-- lib/
 |           +-- sanity/               # Client config, queries, image helpers
 |-- packages/
 |   +-- cms/                          # Sanity schema definitions
 |       +-- schemas/
 |           |-- documents/            # article, author, category, page, tag, teamMember
-|           |-- objects/              # callout, faq, statGrid, tableBlock, videoEmbed
+|           |-- objects/              # callout, faq, statGrid, tableBlock, videoEmbed,
+|           |                         # codeBlock, articleEmbedList, numberedCardList
 |           +-- singletons/           # siteSettings, footerSettings
 |-- infrastructure/                   # Deployment configs, monitoring, scripts
-|-- studio-parenthub/                 # Standalone Sanity Studio (alternative entry)
 |-- turbo.json                        # Turborepo pipeline configuration
 +-- pnpm-workspace.yaml              # Monorepo workspace definition
 ```
@@ -153,7 +219,7 @@ ParentHub-Platform/
 ### Prerequisites
 
 - Node.js 20.0.0 or higher
-- pnpm 9.14.0 or higher - Install with `npm install -g pnpm`
+- pnpm 9.14.0 or higher — Install with `npm install -g pnpm`
 - A Sanity.io project (free tier works)
 
 ### Installation
@@ -215,23 +281,35 @@ ParentHub is designed so that non-technical editors can manage 100% of the conte
 1. Navigate to `/studio` on your running instance
 2. Use the sidebar to create or edit Articles, Authors, Categories, and Pages
 3. Articles support a rich body editor with the following custom blocks:
-   - Callout Boxes (Tip, Warning, and Info variants)
-   - FAQ Accordions (Question/answer pairs that expand on click)
-   - Data Tables (Structured tabular content)
-   - Statistical Grids (Visual data cards with customizable shapes)
-   - Numbered Step Cards (Ordered instructional content)
-   - Product Cards (Merchandise or resource highlights)
-   - Video Embeds (YouTube/Vimeo integration)
+
+   - **Callout Boxes** — 6 semantic types (Info, Warning, Tip, Research, Quote, Accent Dark) × 2 visual styles (Rounded Box, Side-Accent Line)
+   - **FAQ Accordions** — Question/answer pairs that expand on click
+   - **Data Tables** — Structured tabular content with **alignment control** (Left/Center/Right) and **optional row indexing** (#)
+   - **Statistical Grids** — Visual data cards with customizable shapes
+   - **Numbered Step Cards** — Ordered instructional content with branded styling
+   - **Product Cards** — Merchandise or resource highlights
+   - **Video Embeds** — YouTube/Vimeo integration
+   - **Article Embed Lists** — Cross-link related articles with category-aware SEO paths
+   - **Code Snippets** — Multi-language playground with optional live preview sandbox
+
+### Code Snippet Workflow
+
+1. Insert a **Code Snippet** block into the article body
+2. Select the **Language** (HTML, CSS, JavaScript, TypeScript, Python, JSON, or Bash/Shell)
+3. Optionally add a **Filename** (e.g., `index.html`)
+4. Paste or write the code
+5. Toggle **"Enable Live Preview / Sandbox"** to activate the interactive playground
+6. For Python/Bash: fill in the **"Expected Output"** field to power the terminal simulation
 
 ### Author Profiles
 
 Each author document includes:
 
-- **Short Bio** - Displayed on article cards across the site
-- **Full Bio** - Rich text biography rendered on their dedicated profile page
-- **Areas of Expertise** - Tagged skills (e.g., Pediatrics, Nutrition)
-- **Social Links** - Twitter and LinkedIn profiles
-- **Role** - Editorial title displayed beneath their name
+- **Short Bio** — Displayed on article cards across the site
+- **Full Bio** — Rich text biography on their dedicated profile page
+- **Areas of Expertise** — Tagged skills (e.g., Pediatrics, Nutrition)
+- **Social Links** — Twitter and LinkedIn profiles
+- **Role** — Editorial title displayed beneath their name
 
 ### Publishing Workflow
 
@@ -254,11 +332,11 @@ npm install -g vercel
 vercel --prod
 ```
 
-Set all environment variables in the Vercel dashboard under Settings then Environment Variables.
+Set all environment variables in the Vercel dashboard under Settings → Environment Variables.
 
 ### Hostinger VPS
 
-1. **Provision the server** - Install Node.js >= 20, pnpm, and a process manager like PM2
+1. **Provision the server** — Install Node.js >= 20, pnpm, and a process manager like PM2
 
 2. **Clone and build:**
 
@@ -278,7 +356,7 @@ pm2 start npm --name "parenthub" -- start
 
 4. **Configure Nginx** as a reverse proxy pointing to localhost:3000
 
-5. **Set up SSL** via Lets Encrypt / Certbot
+5. **Set up SSL** via Let's Encrypt / Certbot
 
 6. **Configure Sanity webhooks** to point to `https://yourdomain.com/api/revalidate`
 
@@ -294,7 +372,7 @@ The Studio is embedded in the Next.js app at `/studio`, so it deploys alongside 
 |----------|--------|---------|
 | /api/search?q=keyword | GET | Returns top 5 matching articles for live search suggestions |
 | /api/send-article | POST | Sends a branded HTML email containing the article to the specified address |
-| /api/revalidate | POST | Webhook endpoint - Sanity triggers this to revalidate cached pages on publish |
+| /api/revalidate | POST | Webhook endpoint — Sanity triggers this to revalidate cached pages on publish |
 | /api/preview | GET | Activates Next.js Draft Mode for previewing unpublished content |
 | /api/disable-preview | GET | Deactivates Draft Mode and clears the preview cookie |
 | /api/og | GET | Generates dynamic Open Graph images for social sharing |
@@ -312,6 +390,9 @@ The Studio is embedded in the Next.js app at `/studio`, so it deploys alongside 
 - A/B testing framework for headlines and layouts
 - Admin analytics dashboard for editors
 - PWA support for mobile readers
+- Syntax highlighting engine (Prism/Shiki) for code blocks
+- Per-column alignment in data tables
+- Collaborative real-time editing in Sanity
 
 ---
 

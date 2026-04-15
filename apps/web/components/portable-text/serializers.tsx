@@ -5,6 +5,8 @@ import { FAQBlock } from "./FAQBlock";
 import { StatGrid } from "./StatGrid";
 import { NumberedCardList } from "./NumberedCardList";
 import { TableBlock } from "./TableBlock";
+import { ArticleEmbedList } from "./ArticleEmbedList";
+import { CodeBlock } from "./CodeBlock";
 import type { PortableTextComponents } from "@portabletext/react";
 
 const toPlainText = (blocks: any[]): string => {
@@ -24,13 +26,23 @@ const slugify = (text: string) =>
 
 export const portableTextComponents: PortableTextComponents = {
   types: {
-    callout: ({ value }) => <Callout type={value.type} title={value.title} content={value.content} />,
+    callout: ({ value }) => <Callout type={value.type} variant={value.variant} title={value.title} content={value.content} />,
     statGrid: ({ value }) => <StatGrid items={value.items} />,
     numberedCardList: ({ value }) => <NumberedCardList items={value.items} />,
-    tableBlock: ({ value }) => <TableBlock table={value.table} />,
+    tableBlock: ({ value }) => <TableBlock table={value.table} alignment={value.alignment} showIndex={value.showIndex} />,
     imageWithAlt: ({ value }) => <ImageBlock image={value} />,
     videoEmbed: ({ value }) => <VideoEmbed url={value.url} />,
     faq: ({ value }) => <FAQBlock items={value.items} />,
+    articleEmbedList: ({ value }) => <ArticleEmbedList title={value.title} articles={value.articles} />,
+    codeBlock: ({ value }) => (
+      <CodeBlock 
+        code={value.code} 
+        language={value.language} 
+        filename={value.filename} 
+        showPreview={value.showPreview}
+        output={value.output}
+      />
+    ),
   },
   block: {
     h2: ({ children, value }) => {
@@ -47,5 +59,6 @@ export const portableTextComponents: PortableTextComponents = {
   marks: {
     internalLink: ({ value, children }) => <a href={`/${value?.slug}`} className="text-brand-teal underline underline-offset-2 hover:text-brand-teal/80">{children}</a>,
     link: ({ value, children }) => <a href={value?.href} target="_blank" rel="noopener noreferrer" className="text-brand-teal underline underline-offset-2">{children}</a>,
+    code: ({ children }) => <code className="bg-[#FFF9F6] border border-[#FFEDE0] text-[#A34E24] px-1.5 py-0.5 rounded-md font-mono text-[0.85em] font-bold">{children}</code>,
   },
 };

@@ -8,3 +8,5 @@ export { faq } from "./faq";
 export { statGrid } from "./statGrid";
 export { numberedCardList } from "./numberedCardList";
 export { tableBlock } from "./tableBlock";
+export { articleEmbedList } from "./articleEmbedList";
+export { codeBlock } from "./codeBlock";

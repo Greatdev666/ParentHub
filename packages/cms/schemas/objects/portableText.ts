@@ -12,5 +12,7 @@ export const portableText = defineType({
     defineArrayMember({ type: "tableBlock" }),
     defineArrayMember({ type: "videoEmbed" }),
     defineArrayMember({ type: "faq" }),
+    defineArrayMember({ type: "articleEmbedList" }),
+    defineArrayMember({ type: "codeBlock" }),
   ],
 });
