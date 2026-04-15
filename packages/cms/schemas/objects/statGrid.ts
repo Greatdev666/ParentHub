@@ -25,6 +25,7 @@ export const statGrid = defineType({
                   { title: "Square / Rounded", value: "square" },
                   { title: "Circle", value: "circle" },
                   { title: "Triangle", value: "triangle" },
+                  { title: "Rectangle", value: "rectangle" },
                 ],
                 layout: "radio",
               },

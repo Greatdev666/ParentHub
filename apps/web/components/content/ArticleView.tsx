@@ -3,6 +3,7 @@ import { ArticleBody } from "./ArticleBody";
 import { AuthorCard } from "./AuthorCard";
 import { EmailArticleForm } from "./EmailArticleForm";
 import { RelatedArticles } from "./RelatedArticles";
+import { TableOfContents } from "./TableOfContents";
 import { ArticleJsonLd } from "../seo/ArticleJsonLd";
 import { BreadcrumbJsonLd } from "../seo/BreadcrumbJsonLd";
 
@@ -18,27 +19,44 @@ export function ArticleView({ article, category, subcategory }: ArticleViewProps
     : `/${category}/${article.slug.current}`;
 
   return (
-    <article className="mx-auto max-w-3xl px-4 py-12">
+    <div className="mx-auto max-w-7xl px-4 py-12">
       <BreadcrumbJsonLd items={[
         { name: "Home", url: "/" },
         { name: category.replace(/-/g, " ").replace(/\b\w/g, l => l.toUpperCase()), url: `/${category}` },
         { name: article.title, url: currentPath },
       ]} />
       <ArticleJsonLd article={article} />
-      <ArticleHeader article={article} />
-      <div className="mt-8">
-        <ArticleBody body={article.body} />
+
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        {/* Main Content Column */}
+        <article className="lg:col-span-8">
+          <ArticleHeader article={article} />
+          
+          {/* Mobile Table of Contents (Hidden on Large Screens) */}
+          <div className="lg:hidden mt-8">
+            <TableOfContents body={article.body} />
+          </div>
+
+          <div className="mt-8">
+            <ArticleBody body={article.body} />
+          </div>
+          
+          <AuthorCard author={article.author} />
+          
+          <EmailArticleForm 
+            article={article} 
+            categorySlug={category} 
+            subcategorySlug={subcategory || "general"} 
+          />
+          
+          <RelatedArticles articleId={article._id} category={category} />
+        </article>
+
+        {/* Sidebar Column (Desktop Only) */}
+        <aside className="hidden lg:block lg:col-span-4">
+          <TableOfContents body={article.body} />
+        </aside>
       </div>
-      
-      <AuthorCard author={article.author} />
-      
-      <EmailArticleForm 
-        article={article} 
-        categorySlug={category} 
-        subcategorySlug={subcategory || "general"} 
-      />
-      
-      <RelatedArticles articleId={article._id} category={category} />
-    </article>
+    </div>
   );
 }

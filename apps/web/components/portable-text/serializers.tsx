@@ -7,6 +7,21 @@ import { NumberedCardList } from "./NumberedCardList";
 import { TableBlock } from "./TableBlock";
 import type { PortableTextComponents } from "@portabletext/react";
 
+const toPlainText = (blocks: any[]): string => {
+  return blocks
+    .map((block) => {
+      if (block._type !== "block" || !block.children) {
+        return "";
+      }
+      return block.children.map((child: any) => child.text).join("");
+    })
+    .join("\n\n");
+};
+
+// Simple helper for IDs
+const slugify = (text: string) => 
+  text.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '');
+
 export const portableTextComponents: PortableTextComponents = {
   types: {
     callout: ({ value }) => <Callout type={value.type} title={value.title} content={value.content} />,
@@ -16,6 +31,18 @@ export const portableTextComponents: PortableTextComponents = {
     imageWithAlt: ({ value }) => <ImageBlock image={value} />,
     videoEmbed: ({ value }) => <VideoEmbed url={value.url} />,
     faq: ({ value }) => <FAQBlock items={value.items} />,
+  },
+  block: {
+    h2: ({ children, value }) => {
+      const text = value.children.map((c: any) => c.text).join("");
+      const id = slugify(text) || value._key;
+      return <h2 id={id} className="scroll-mt-24">{children}</h2>;
+    },
+    h3: ({ children, value }) => {
+      const text = value.children.map((c: any) => c.text).join("");
+      const id = slugify(text) || value._key;
+      return <h3 id={id} className="scroll-mt-24">{children}</h3>;
+    },
   },
   marks: {
     internalLink: ({ value, children }) => <a href={`/${value?.slug}`} className="text-brand-teal underline underline-offset-2 hover:text-brand-teal/80">{children}</a>,

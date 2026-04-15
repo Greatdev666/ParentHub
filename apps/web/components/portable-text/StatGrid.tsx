@@ -4,7 +4,7 @@ interface StatItem {
   value: string;
   label: string;
   description?: string;
-  shape?: "square" | "circle" | "triangle";
+  shape?: "square" | "circle" | "triangle" | "rectangle";
 }
 
 export function StatGrid({ items }: { items: StatItem[] }) {
@@ -34,6 +34,9 @@ export function StatGrid({ items }: { items: StatItem[] }) {
           inlineStyles.clipPath = 'polygon(50% 0%, 0% 100%, 100% 100%)';
           inlineStyles.WebkitClipPath = 'polygon(50% 0%, 0% 100%, 100% 100%)';
           inlineStyles.aspectRatio = '1/1';
+        } else if (shape === "rectangle" || shape.includes("rectangle")) {
+          shapeClasses += "bg-white dark:bg-brand-dark-card border border-brand-navy/10 dark:border-white/10 rounded-2xl shadow-sm px-10";
+          inlineStyles.aspectRatio = '2/1';
         } else {
           // Default Square
           shapeClasses += "bg-white dark:bg-brand-dark-card border border-brand-navy/10 dark:border-white/10 rounded-2xl shadow-sm";

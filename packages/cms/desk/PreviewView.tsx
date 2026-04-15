@@ -19,8 +19,12 @@ export function PreviewView({ document }: { document: any }) {
     )
   }
 
-  // Use our new 'Smart GPS' route to find the article by ID
-  const previewUrl = `http://localhost:3000/api/preview?id=${displayed._id}`
+  // Use dynamic URL based on environment
+  const remoteUrl = 'https://parenthub-web.vercel.app'
+  const isProd = typeof window !== 'undefined' && !window.location.hostname.includes('localhost')
+  const baseUrl = isProd ? remoteUrl : 'http://localhost:3000'
+  
+  const previewUrl = `${baseUrl}/api/preview?id=${displayed._id}`
 
   return (
     <iframe
