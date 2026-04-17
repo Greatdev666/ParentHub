@@ -3,7 +3,7 @@ import { sanityFetch } from "./fetch";
 export async function getHomepageData() {
   const featuredRaw = await sanityFetch({
     query: `*[_type == "article" && featured == true] | order(publishedAt desc)[0] {
-      _id, title, slug, excerpt, mainImage, publishedAt, readingTime,
+      _id, title, slug, excerpt, mainImage, publishedAt, readingTime, likes,
       category->{slug, title}, subcategory->{slug, title}, author->{name, image, role}
     }`,
     tags: ["article"]
@@ -12,7 +12,7 @@ export async function getHomepageData() {
   // Fetch ALL featured articles for the Featured Topics carousel
   const featuredTopics = await sanityFetch({
     query: `*[_type == "article" && featured == true] | order(publishedAt desc)[0...8] {
-      _id, title, slug, excerpt, mainImage, publishedAt, readingTime,
+      _id, title, slug, excerpt, mainImage, publishedAt, readingTime, likes,
       category->{slug, title}, subcategory->{slug, title}, author->{name, image, role}
     }`,
     tags: ["article"]
@@ -21,7 +21,7 @@ export async function getHomepageData() {
   // 1. Fetch Latest Articles
   const latestArticlesResult = await sanityFetch({
     query: `*[_type == "article"] | order(publishedAt desc)[0...5] {
-      _id, title, slug, excerpt, mainImage, publishedAt, readingTime,
+      _id, title, slug, excerpt, mainImage, publishedAt, readingTime, likes,
       category->{slug, title}, subcategory->{slug, title}, author->{name, image, role}
     }`,
     tags: ["article"]
@@ -44,17 +44,17 @@ export async function getHomepageData() {
 
   // 3. Fetch Categories & Articles
   const categoriesRaw = await sanityFetch({
-    query: `*[_type == "category" && !defined(parent)] | order(order asc) {
+    query: `*[_type == "category" && !defined(parent) && defined(title) && defined(slug.current)] | order(order asc) {
       _id, title, "slug": slug.current, description, image,
       "subcategories": *[_type == "category" && parent._ref == ^._id] {
         _id, title,
         "articles": *[_type == "article" && subcategory._ref == ^._id] | order(publishedAt desc)[0...5] {
-          _id, title, slug, excerpt, mainImage, publishedAt, readingTime,
+          _id, title, slug, excerpt, mainImage, publishedAt, readingTime, likes,
           category->{slug, title}, subcategory->{slug, title}, author->{name, image, role}
         }
       },
       "directArticles": *[_type == "article" && category._ref == ^._id && !defined(subcategory)] | order(publishedAt desc)[0...5] {
-          _id, title, slug, excerpt, mainImage, publishedAt, readingTime,
+          _id, title, slug, excerpt, mainImage, publishedAt, readingTime, likes,
           category->{slug, title}, subcategory->{slug, title}, author->{name, image, role}
       }
     }`,
@@ -119,7 +119,7 @@ export async function getHomepageData() {
 
 export async function getNavCategories() {
   return sanityFetch({
-    query: `*[_type == "category" && !defined(parent)] | order(order asc) {
+    query: `*[_type == "category" && !defined(parent) && defined(title) && defined(slug.current)] | order(order asc) {
       _id,
       title,
       description,
@@ -154,7 +154,7 @@ export async function getFooterData() {
   });
 
   const categories = await sanityFetch({
-    query: `*[_type == "category" && !defined(parent)] | order(order asc) [0...7] {
+    query: `*[_type == "category" && !defined(parent) && defined(title) && defined(slug.current)] | order(order asc) [0...7] {
       _id, title, "slug": slug.current
     }`,
     tags: ["category"]
@@ -174,7 +174,7 @@ export async function getCategory(slug: string) {
 export async function getCategoryArticles(categorySlug: string) {
   return sanityFetch({
     query: `*[_type == "article" && category->slug.current == $slug] | order(publishedAt desc) {
-      _id, title, slug, excerpt, mainImage, publishedAt, readingTime,
+      _id, title, slug, excerpt, mainImage, publishedAt, readingTime, likes,
       category->{slug, title}, subcategory->{slug, title}, author->{name, image, role}
     }`,
     params: { slug: categorySlug },
@@ -185,7 +185,7 @@ export async function getCategoryArticles(categorySlug: string) {
 export async function getSubcategoryArticles(categorySlug: string, subcategorySlug: string) {
   return sanityFetch({
     query: `*[_type == "article" && category->slug.current == $catSlug && subcategory->slug.current == $subSlug] | order(publishedAt desc) {
-      _id, title, slug, excerpt, mainImage, publishedAt, readingTime,
+      _id, title, slug, excerpt, mainImage, publishedAt, readingTime, likes,
       category->{slug, title}, subcategory->{slug, title}, author->{name, image, role}
     }`,
     params: { catSlug: categorySlug, subSlug: subcategorySlug },
@@ -222,7 +222,7 @@ export async function getArticle(slug: string) {
 export async function getRelatedArticles(articleId: string, categorySlug: string) {
   return sanityFetch({
     query: `*[_type == "article" && _id != $articleId && category->slug.current == $slug] | order(publishedAt desc)[0...3] {
-      _id, title, slug, excerpt, mainImage, publishedAt, readingTime,
+      _id, title, slug, excerpt, mainImage, publishedAt, readingTime, likes,
       category->{slug, title}, subcategory->{slug, title}, author->{name, image}
     }`,
     params: { articleId, slug: categorySlug },
@@ -249,7 +249,7 @@ export async function getAuthorBySlug(slug: string) {
 export async function getArticlesByAuthor(authorId: string) {
   return sanityFetch({
     query: `*[_type == "article" && author._ref == $authorId] | order(publishedAt desc) {
-      _id, title, slug, excerpt, mainImage, publishedAt, readingTime,
+      _id, title, slug, excerpt, mainImage, publishedAt, readingTime, likes,
       category->{slug, title}, subcategory->{slug, title}
     }`,
     params: { authorId },
@@ -272,7 +272,7 @@ export async function searchArticles(keyword: string) {
 export async function getTagArticles(slug: string) {
   return sanityFetch({
     query: `*[_type == "article" && tags[]->slug.current match $slug] | order(publishedAt desc) {
-      _id, title, slug, excerpt, mainImage, publishedAt, readingTime,
+      _id, title, slug, excerpt, mainImage, publishedAt, readingTime, likes,
       category->{slug, title}, subcategory->{slug, title}, author->{name, image}
     }`,
     params: { slug },

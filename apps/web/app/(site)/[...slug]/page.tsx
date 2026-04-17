@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { getPage, getArticle, getCategory, getCategoryArticles, getSubcategoryArticles } from "@/lib/sanity/queries";
 import { ArticleBody } from "@/components/content/ArticleBody";
 import { ArticleView } from "@/components/content/ArticleView";
@@ -9,6 +9,13 @@ type Props = { params: { slug: string[] } };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const depth = params.slug.length;
+  const categorySegment = params.slug[0];
+
+  // 0. Ignore Sanity-reserved paths
+  if (categorySegment === "studio" || categorySegment === "structure") {
+    return { title: "CMS" };
+  }
+
   const lastSegment = params.slug[depth - 1];
   const fullSlug = params.slug.join("/");
 
@@ -44,8 +51,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function UniversalResolver({ params }: Props) {
   const depth = params.slug.length;
-  const lastSegment = params.slug[depth - 1];
   const categorySegment = params.slug[0];
+
+  // 0. Ignore Sanity-reserved paths (let the dedicated /studio route handle them)
+  if (categorySegment === "studio" || categorySegment === "structure") {
+    return notFound();
+  }
+
+  const lastSegment = params.slug[depth - 1];
   const subcategorySegment = depth > 1 ? params.slug[1] : null;
   const fullSlug = params.slug.join("/");
 

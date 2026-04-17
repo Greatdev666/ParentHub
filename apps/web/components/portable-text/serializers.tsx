@@ -59,6 +59,10 @@ export const portableTextComponents: PortableTextComponents = {
   marks: {
     internalLink: ({ value, children }) => <a href={`/${value?.slug}`} className="text-brand-teal underline underline-offset-2 hover:text-brand-teal/80">{children}</a>,
     link: ({ value, children }) => <a href={value?.href} target="_blank" rel="noopener noreferrer" className="text-brand-teal underline underline-offset-2">{children}</a>,
-    code: ({ children }) => <code className="bg-[#FFF9F6] border border-[#FFEDE0] text-[#A34E24] px-1.5 py-0.5 rounded-md font-mono text-[0.85em] font-bold">{children}</code>,
+    code: ({ children }) => (
+      <code className="bg-[#FFF9F6] dark:bg-white/10 border border-[#FFEDE0] dark:border-white/10 text-[#A34E24] dark:text-brand-orange px-1.5 py-0.5 rounded-md font-mono text-[0.85em] font-bold">
+        {children}
+      </code>
+    ),
   },
 };

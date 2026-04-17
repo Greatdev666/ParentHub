@@ -44,8 +44,8 @@ export function NumberedCardList({ items }: { items: CardItem[] }) {
               </div>
 
               {item.tip && (
-                <div className="bg-[#FFFBEB] dark:bg-amber-900/10 border-l-4 border-amber-200 p-5 rounded-r-xl mb-6">
-                  <p className="text-amber-900 dark:text-amber-200 text-base leading-relaxed">
+                <div className="bg-[#FFFBEB] dark:bg-amber-950/30 border-l-4 border-amber-200 dark:border-amber-900/50 p-5 rounded-r-xl mb-6 transition-colors">
+                  <p className="text-amber-900 dark:text-amber-100 text-base leading-relaxed">
                     {item.tip}
                   </p>
                 </div>

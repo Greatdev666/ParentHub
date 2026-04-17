@@ -1,4 +1,10 @@
 import React from "react";
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
 
 interface TableRow {
   _key: string;
@@ -41,7 +47,12 @@ export function TableBlock({
               {rows[0].cells.map((cell, i) => (
                 <th 
                   key={i} 
-                  className={`px-8 py-5 text-[10px] md:text-xs font-black uppercase tracking-[0.2em] !text-white whitespace-nowrap border-r border-white/5 last:border-0 ${alignment === 'center' ? '!text-center' : ''}`}
+                  className={cn(
+                    "px-8 py-5 text-[10px] md:text-xs font-black uppercase tracking-[0.2em] !text-white whitespace-nowrap border-r border-white/5 last:border-0",
+                    i === 0 && "pl-12",
+                    i === rows[0].cells.length - 1 && "pr-12",
+                    `!${alignmentClass}`
+                  )}
                 >
                   {cell}
                 </th>
@@ -55,14 +66,19 @@ export function TableBlock({
                 className="group hover:bg-brand-cream/30 dark:hover:bg-white/[0.02] transition-colors"
               >
                 {showIndex && (
-                  <td className="px-6 py-6 text-sm font-black text-brand-orange text-center bg-brand-navy/[0.02] border-r border-brand-navy/5">
+                  <td className="px-6 py-6 text-sm font-black text-brand-orange text-center bg-brand-navy/[0.02] border-r border-brand-navy/5 pl-10">
                     {rowIndex + 1}
                   </td>
                 )}
                 {row.cells.map((cell, j) => (
                   <td 
                     key={j} 
-                    className={`px-8 py-6 text-sm md:text-base text-brand-navy/80 dark:text-gray-300 font-medium leading-relaxed ${alignment === 'center' ? '!text-center' : ''}`}
+                    className={cn(
+                      "px-8 py-6 text-sm md:text-base text-brand-navy/80 dark:text-gray-300 font-medium leading-relaxed",
+                      j === 0 && !showIndex && "pl-12",
+                      j === row.cells.length - 1 && "pr-12",
+                      `!${alignmentClass}`
+                    )}
                   >
                     {cell}
                   </td>

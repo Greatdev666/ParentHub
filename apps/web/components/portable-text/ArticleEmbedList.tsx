@@ -20,7 +20,7 @@ export function ArticleEmbedList({ title, articles }: ArticleEmbedListProps) {
 
   return (
     <div className="my-10 flex flex-col gap-3">
-      <h3 className="text-[11px] font-black uppercase tracking-[0.25em] text-brand-navy/40 mb-2 ml-2">
+      <h3 className="text-[11px] font-black uppercase tracking-[0.25em] text-brand-navy/40 dark:text-gray-500 mb-2 ml-2">
         {title || "In this post"}
       </h3>
       
@@ -45,7 +45,7 @@ export function ArticleEmbedList({ title, articles }: ArticleEmbedListProps) {
               <span>{article.category?.title || "Editorial"}</span>
               {article.readingTime && (
                 <>
-                  <span className="w-1 h-1 rounded-full bg-[#A34E24]/20" />
+                  <span className="w-1 h-1 rounded-full bg-[#A34E24]/20 dark:bg-brand-orange/20" />
                   <span>{article.readingTime} min read</span>
                 </>
               )}

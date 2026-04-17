@@ -67,6 +67,13 @@ A standout feature that elevates ParentHub from editorial platform to interactiv
 - **Universal Route Resolver** — A single catch-all resolver handles all content depths (1, 2, or 3 segments) with intelligent fallback logic, eliminating 404s for flat and nested article paths alike
 - **Related Articles** — Contextual recommendations at the bottom of every article
 
+### Community Interactions
+
+- **Secure Guest Commenting** — Readers can engage with articles via a threaded commenting system without needing strict user accounts.
+- **Passwordless Guest Editing** — Includes a sophisticated "Ownership Token" system allowing users to securely edit their comments via browser-binding within a 24-hour window.
+- **Smart Thread Deletion** — Authors can remove comments within 24 hours. Employs a dual-strategy engine: Hard Deletes for solitary comments, and Soft Deletes for thread anchors to preserve conversation context.
+- **Toggle-able Loves** — Integrated "Unlike" logic letting users toggle their engagement securely, complete with server-side safety floors so engagement counts never drop below zero.
+
 ### Performance & SEO
 
 - **Server-Side Rendering** — All pages rendered via Next.js App Router for maximum performance and crawlability
@@ -372,6 +379,8 @@ The Studio is embedded in the Next.js app at `/studio`, so it deploys alongside 
 |----------|--------|---------|
 | /api/search?q=keyword | GET | Returns top 5 matching articles for live search suggestions |
 | /api/send-article | POST | Sends a branded HTML email containing the article to the specified address |
+| /api/comments | GET/POST/PATCH/DELETE | Handles guest commenting, ownership verification, smart deletion, and 24h edits |
+| /api/likes | POST | Handles optimistic toggling of content likes (increment/decrement) with strict positive floors |
 | /api/revalidate | POST | Webhook endpoint — Sanity triggers this to revalidate cached pages on publish |
 | /api/preview | GET | Activates Next.js Draft Mode for previewing unpublished content |
 | /api/disable-preview | GET | Deactivates Draft Mode and clears the preview cookie |
@@ -382,7 +391,6 @@ The Studio is embedded in the Next.js app at `/studio`, so it deploys alongside 
 ## Roadmap
 
 - Newsletter subscription system with audience segmentation
-- Comment and discussion threads on articles
 - Algolia integration for advanced full-text search
 - Reading progress indicator on article pages
 - Bookmark and save article functionality

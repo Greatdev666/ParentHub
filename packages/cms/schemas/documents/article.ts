@@ -44,6 +44,13 @@ export const article = defineType({
     defineField({ name: "publishedAt", title: "Published At", type: "datetime", validation: (r) => r.required() }),
     defineField({ name: "featured", title: "Featured", type: "boolean", initialValue: false }),
     defineField({ name: "readingTime", title: "Reading Time (min)", type: "number" }),
+    defineField({ 
+      name: "likes", 
+      title: "Loves/Likes", 
+      type: "number", 
+      initialValue: 0,
+      description: "Counter for community engagement" 
+    }),
     defineField({ name: "seo", title: "SEO", type: "seo" }),
   ],
   preview: {

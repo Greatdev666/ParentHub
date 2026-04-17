@@ -10,6 +10,7 @@ import { presentationTool } from "sanity/presentation";
 
 export default defineConfig({
   name: "parenthub",
+  basePath: "/studio",
   title: "ParentHub CMS",
   projectId: process.env.SANITY_STUDIO_PROJECT_ID || process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "ofams2gz",
   dataset: process.env.SANITY_STUDIO_DATASET || process.env.NEXT_PUBLIC_SANITY_DATASET || "production",

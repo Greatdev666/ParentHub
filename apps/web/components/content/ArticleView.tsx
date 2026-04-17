@@ -4,6 +4,8 @@ import { AuthorCard } from "./AuthorCard";
 import { EmailArticleForm } from "./EmailArticleForm";
 import { RelatedArticles } from "./RelatedArticles";
 import { TableOfContents } from "./TableOfContents";
+import { CommentSection } from "../interactive/comments/CommentSection";
+import { LikeAction } from "../interactive/comments/LikeAction";
 import { ArticleJsonLd } from "../seo/ArticleJsonLd";
 import { BreadcrumbJsonLd } from "../seo/BreadcrumbJsonLd";
 
@@ -41,6 +43,13 @@ export function ArticleView({ article, category, subcategory }: ArticleViewProps
             <ArticleBody body={article.body} />
           </div>
           
+          <div className="mt-8 flex justify-start items-center gap-3">
+             <span className="text-sm font-bold uppercase tracking-widest text-brand-navy/50 dark:text-gray-400">Loved this article?</span>
+             <LikeAction id={article._id} type="article" initialLikes={article.likes} showCount={true} className="border border-brand-navy/10 dark:border-white/10 rounded-full px-4 py-2 hover:bg-brand-navy/5 dark:hover:bg-white/5" />
+          </div>
+          
+          <CommentSection articleId={article._id} />
+
           <EmailArticleForm 
             article={article} 
             categorySlug={category} 
@@ -48,7 +57,7 @@ export function ArticleView({ article, category, subcategory }: ArticleViewProps
           />
 
           <AuthorCard author={article.author} />
-          
+
           <RelatedArticles articleId={article._id} category={category} />
         </article>
 
